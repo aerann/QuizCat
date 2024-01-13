@@ -13,4 +13,9 @@ func Handler(r *chi.Mux) {
 			r.Get("/", GenerateCards)
 		},
 	)
+
+	r.Route("/", func(r chi.Router) {
+			r.Get("/", Heartbeat)
+		},
+	)
 }

@@ -15,7 +15,7 @@ func Handler(r *chi.Mux) {
 	)
 
 	r.Route("/", func(r chi.Router) {
-			r.Get("/", Heartbeat)
+			r.Get("/", HealthCheck)
 		},
 	)
 }

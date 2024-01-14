@@ -7,6 +7,7 @@ import (
 	"quizcat-server/internal/handlers"
 
 	"github.com/go-chi/chi"
+	"github.com/joho/godotenv"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -16,8 +17,13 @@ func main() {
 	handlers.Handler(r)
 
 	fmt.Println("Starting quizcat-server")
-	
-	err := http.ListenAndServe(":8080", r)
+
+	err := godotenv.Load()
+    if err != nil {
+        log.Error("Error loading .env file")
+    }
+
+	err = http.ListenAndServe(":8080", r)
 	if err != nil {
 		log.Error(err)
 	}

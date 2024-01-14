@@ -6,8 +6,7 @@ type Card struct {
 }
 
 type GenerateCardsParams struct {
-	Text      string `json:"text"`
-	Questions int    `json:"questions"`
+	Text string `json:"text"`
 }
 
 type GenerateCardsResponse struct {

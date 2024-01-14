@@ -51,12 +51,12 @@ func cohereRequest(input string) string {
 	client := cohereclient.NewClient(cohereclient.WithToken(auth_key))
 
 	// Request inputs!
-	length, err1 := cohere.NewSummarizeRequestLengthFromString("medium")
+	length, err1 := cohere.NewSummarizeRequestLengthFromString("long")
 	format, err2 := cohere.NewSummarizeRequestFormatFromString("paragraph")
 	model := "command"
-	extractiveness := cohere.SummarizeRequestExtractiveness("medium")
-	temp := 0.7
-	additional_command := `Generate a summary consisting of Questions and Answers from the input that can be used as study material. Format as such:
+	extractiveness := cohere.SummarizeRequestExtractiveness("low")
+	temp := 2.0
+	additional_command := `Generate a summary consisting of Questions and Answers from the input that can be used as study material. Try to create as many question and answer pairs as possible, but also keep answers as concise as possible. Format as such:
 	1. Question 1
 	ANSWER: Answer 1
 	
@@ -102,6 +102,7 @@ func parseQuestionAnswer(input string, ret *[]api.Card) {
 
 		if strings.HasPrefix(line, "ANSWER:") || strings.HasPrefix(line, "Answer:") {
 			currentCard.Answer = strings.TrimPrefix(line, "ANSWER: ")
+			currentCard.Answer = strings.TrimPrefix(currentCard.Answer, "Answer: ")
 			*ret = append(*ret, currentCard)
 			currentCard = api.Card{}
 			isQuestion = false

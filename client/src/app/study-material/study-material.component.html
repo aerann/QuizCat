@@ -1,29 +1,29 @@
-<form (ngSubmit)="onSubmit(f)" #f="ngForm" class="body"> 
-    <!-- <label 
+<form (ngSubmit)="onSubmit(f)" #f="ngForm" class="body">
+  <!-- <label 
         for="study_material" 
         class="form-control">
     </label> -->
-    <div class="flex-container">
-        <textarea
-            type="text" 
-            id="study_material" 
-            name="study_material"
-            placeholder="Enter your course notes here:" 
-            [(ngModel)]="study_material_text" 
-            required 
-            #study_material="ngModel">
-        </textarea>
+  <div class="flex-container">
+    <textarea
+      type="text"
+      id="study_material"
+      name="study_material"
+      placeholder="Enter your course notes here:"
+      [(ngModel)]="study_material_text"
+      required
+      #study_material="ngModel"
+    >
+    </textarea>
 
-        <!-- <p *ngIf="!study_material.valid && !!study_material.touched" class="help-block">Please enter your study material!</p> -->
-        <button type="submit" [disabled]="!f.valid">Generate flashcards</button>
+    <!-- <p *ngIf="!study_material.valid && !!study_material.touched" class="help-block">Please enter your study material!</p> -->
+    <button type="submit" [disabled]="!f.valid">Generate!</button>
 
-        <div *ngIf="isLoading"><img src="assets/img/dancing cat.gif" alt="dancing cat"></div>
+    <div *ngIf="isLoading">
+      <img src="assets/img/dancing cat.gif" alt="dancing cat" />
     </div>
+  </div>
 </form>
 
 <div *ngFor="let card of cards" class="body">
-    <app-flash-card [cardData]="card"></app-flash-card>
+  <app-flash-card [cardData]="card"></app-flash-card>
 </div>
-
-
-  

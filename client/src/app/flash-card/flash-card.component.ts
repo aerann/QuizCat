@@ -1,28 +1,28 @@
-import { Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-flash-card',
   templateUrl: './flash-card.component.html',
-  styleUrl: './flash-card.component.css'
+  styleUrl: './flash-card.component.css',
 })
-export class FlashCardComponent implements OnInit{
-  @Input() cardData: any; 
-  isClicked;
+export class FlashCardComponent implements OnInit {
+  @Input() cardData: any;
+  isClicked = false;
 
-  ngOnInit(){
+  ngOnInit() {
     // cardData: any
-    console.log(this.cardData)
-  }
-  
-  toggleClicked(){
-    this.isClicked = !this.isClicked 
-    return this.isClicked
+    console.log(this.cardData);
   }
 
-  getColor(){
-    if (!this.isClicked){
-      return '#a3c3eb' //change to background of card
-    } 
-    return '#afe1a6'
+  toggleClicked() {
+    this.isClicked = !this.isClicked;
+    // return this.isClicked;
+  }
+
+  getColor() {
+    if (!this.isClicked) {
+      return '#fbb37ca2'; //change to background of card
+    }
+    return '#afe1a6';
   }
 }

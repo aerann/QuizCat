@@ -16,6 +16,7 @@ import (
 )
 
 func GenerateCards(w http.ResponseWriter, r *http.Request) {
+
 	var params = api.GenerateCardsParams{}
 	decode_err := json.NewDecoder(r.Body).Decode(&params)
 	if decode_err != nil {
@@ -26,7 +27,7 @@ func GenerateCards(w http.ResponseWriter, r *http.Request) {
 	var cohereAPIresult string = cohereRequest(params.Text)
 	// fmt.Println("COHERE RESULT: ", cohereAPIresult)
 
-	var cards []api.Card =	[]api.Card{}
+	var cards []api.Card = []api.Card{}
 	parseQuestionAnswer(cohereAPIresult, &cards)
 
 	var response = api.GenerateCardsResponse{
@@ -66,13 +67,13 @@ func cohereRequest(input string) string {
 	`
 
 	req := cohere.SummarizeRequest{
-		Text: input,
-		Length: &length,
-		Format : &format,
-		Model : &model,
-		Extractiveness: &extractiveness,
-		Temperature : &temp,
-		AdditionalCommand : &additional_command,
+		Text:              input,
+		Length:            &length,
+		Format:            &format,
+		Model:             &model,
+		Extractiveness:    &extractiveness,
+		Temperature:       &temp,
+		AdditionalCommand: &additional_command,
 	}
 
 	response, err3 := client.Summarize(context.TODO(), &req)
@@ -84,42 +85,42 @@ func cohereRequest(input string) string {
 	}
 
 	// fmt.Println("COHERE: ", *response.Summary)
-	return *response.Summary;
+	return *response.Summary
 }
 
 func parseQuestionAnswer(input string, ret *[]api.Card) {
 	var currentCard api.Card
-    var isQuestion bool
+	var isQuestion bool
 
 	lines := strings.Split(input, "\n")
 
 	for _, line := range lines {
-        line = strings.TrimSpace(line)
-        if line == "" {
-            continue
-        }
+		line = strings.TrimSpace(line)
+		if line == "" {
+			continue
+		}
 
-        if strings.HasPrefix(line, "ANSWER:") || strings.HasPrefix(line, "Answer:") {
-            currentCard.Answer = strings.TrimPrefix(line, "ANSWER: ")
-            *ret = append(*ret, currentCard)
-            currentCard = api.Card{}
-            isQuestion = false
-        } else if strings.HasSuffix(line, "?") || unicode.IsDigit([]rune(line)[0]){
-            if isQuestion {
-                *ret = append(*ret, currentCard) // Save the previous Q&A pair if a new question starts
-                currentCard = api.Card{}
-            }
-            currentCard.Question = line
-            isQuestion = true
-        } else if isQuestion {
-            currentCard.Question += " " + line
-        } else {
-            currentCard.Answer += " " + line
-        }
-    }
+		if strings.HasPrefix(line, "ANSWER:") || strings.HasPrefix(line, "Answer:") {
+			currentCard.Answer = strings.TrimPrefix(line, "ANSWER: ")
+			*ret = append(*ret, currentCard)
+			currentCard = api.Card{}
+			isQuestion = false
+		} else if strings.HasSuffix(line, "?") || unicode.IsDigit([]rune(line)[0]) {
+			if isQuestion {
+				*ret = append(*ret, currentCard) // Save the previous Q&A pair if a new question starts
+				currentCard = api.Card{}
+			}
+			currentCard.Question = line
+			isQuestion = true
+		} else if isQuestion {
+			currentCard.Question += " " + line
+		} else {
+			currentCard.Answer += " " + line
+		}
+	}
 
-    // Add the last Q&A pair if it exists
-    if currentCard.Question != "" && currentCard.Answer != ""{
-        *ret = append(*ret, currentCard)
-    }
-} 
+	// Add the last Q&A pair if it exists
+	if currentCard.Question != "" && currentCard.Answer != "" {
+		*ret = append(*ret, currentCard)
+	}
+}

@@ -3,36 +3,44 @@
         for="study_material" 
         class="form-control">
     </label> -->
-  <div class="flex-container">
-    <div *ngIf="!isDone">
-    <textarea
-      type="text"
-      id="study_material"
-      name="study_material"
-      placeholder="Enter your course notes here:"
-      [(ngModel)]="study_material_text"
-      required
-      #study_material="ngModel"
-    > 
-    </textarea>
+  <div>
+    <div *ngIf="!isDone" class="flex-container">
+      <textarea
+        type="text"
+        id="study_material"
+        name="study_material"
+        placeholder="Enter your course notes here:"
+        [(ngModel)]="study_material_text"
+        required
+        #study_material="ngModel"
+      >
+      </textarea>
 
-    <!-- <p *ngIf="!study_material.valid && !!study_material.touched" class="help-block">Please enter your study material!</p> -->
-    <button type="submit" [disabled]="!f.valid">Generate!</button>
-    </div> 
+      <!-- <p *ngIf="!study_material.valid && !!study_material.touched" class="help-block">Please enter your study material!</p> -->
+      <button type="submit" [disabled]="!f.valid">Generate!</button>
+    </div>
     <div class="flex-container" *ngIf="isLoading">
-        <div><img src="assets/img/dancing cat.gif" alt="dancing cat"></div>
+      <div><img src="assets/img/dancing cat.gif" alt="dancing cat" /></div>
       <p>Generating...</p>
-    </div> 
-    </div> 
+    </div>
   </div>
 </form>
 
 <div *ngIf="isDone && !isLoading">
-    <p (click)="refreshPage()"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>Back</p>
+  <p (click)="refreshPage()">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="16"
+      width="14"
+      viewBox="0 0 448 512"
+    >
+      <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+      <path
+        d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+      /></svg
+    >Back
+  </p>
 </div>
 <div *ngFor="let card of cards" class="body">
   <app-flash-card [cardData]="card"></app-flash-card>
 </div>
-
-
-  

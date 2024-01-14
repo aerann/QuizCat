@@ -17,6 +17,7 @@ textarea {
 .flex-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 30vw;
   height: 100%;
@@ -40,10 +41,4 @@ button:hover {
 button:disabled {
   background-color: #9fbadda4;
   color: #ccdccc;
-}
-
-.flex-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }

@@ -1,0 +1,6 @@
+<div class="card">
+    <div class="container">
+        <p>{{ cardData.question }}</p>
+        <p (click)="toggleClicked()" [ngStyle]="{color: getColor()}"><i>{{ cardData.answer }}</i></p>
+    </div>
+</div>

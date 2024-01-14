@@ -7,22 +7,29 @@ import { HttpClient} from '@angular/common/http';
   templateUrl: './study-material.component.html',
   styleUrl: './study-material.component.css'
 })
+
 export class StudyMaterialComponent {
   study_material_text; 
   res;
-
+  // cards;
+  //cards = ['test1', 'test2'] 
+  cards = [] 
   constructor(private http: HttpClient) { }
 
 
   async onSubmit(form: NgForm){
+    
     console.log(form);
     console.log('this is the body text:', this.study_material_text )
     // Simple POST request with a JSON body and response type <any>
     this.http.post<any>('http://localhost:8080/generate_cards', { text: this.study_material_text}).subscribe(data => {
         console.log('HELLLLLOOO')
         console.log('response', data)
+        this.res = data 
+        for (const card of this.res.cards) {
+          this.cards.push(card)
+        }
     })
-
   }
 
 }

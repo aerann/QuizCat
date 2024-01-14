@@ -41,3 +41,9 @@ button:disabled {
   background-color: #9fbadda4;
   color: #ccdccc;
 }
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

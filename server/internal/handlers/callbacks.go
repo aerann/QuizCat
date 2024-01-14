@@ -25,7 +25,6 @@ func GenerateCards(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	var cohereAPIresult string = cohereRequest(params.Text)
-	// fmt.Println("COHERE RESULT: ", cohereAPIresult)
 
 	var cards []api.Card = []api.Card{}
 	parseQuestionAnswer(cohereAPIresult, &cards)

@@ -12,20 +12,21 @@ import (
 )
 
 func main() {
+	port := 8080
 	log.SetReportCaller(true)
 	var r *chi.Mux = chi.NewRouter()
 	handlers.Handler(r)
 
-	fmt.Println("Starting quizcat-server")
+	fmt.Println("Starting quizcat-server on port", port)
 
 	err := godotenv.Load()
-    if err != nil {
-        log.Error("Error loading .env file")
-    }
+	if err != nil {
+		log.Error("Error loading .env file")
+	}
 
-	err = http.ListenAndServe(":8080", r)
+	colonPort := ":" + fmt.Sprint(port)
+	err = http.ListenAndServe(colonPort, r)
 	if err != nil {
 		log.Error(err)
 	}
 }
-

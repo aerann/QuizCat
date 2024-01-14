@@ -6,11 +6,12 @@ import { StudyMaterialComponent } from './study-material/study-material.componen
 import { HttpClientModule } from '@angular/common/http';
 import { FlashCardComponent } from './flash-card/flash-card.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     StudyMaterialComponent,
-    FlashCardComponent
+    FlashCardComponent,
   ],
   imports: [
     BrowserModule,

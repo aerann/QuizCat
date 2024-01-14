@@ -1,0 +1,13 @@
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+}
+
+body{
+    min-height: 100vh;
+    min-width: 100vh;
+    background-color: #a5c6ef;
+}
+

@@ -11,6 +11,7 @@ import { HttpClient} from '@angular/common/http';
 export class StudyMaterialComponent {
   study_material_text; 
   res;
+  isLoading = false; 
   // cards;
   //cards = ['test1', 'test2'] 
   cards = [] 
@@ -22,10 +23,10 @@ export class StudyMaterialComponent {
     console.log(form);
     console.log('this is the body text:', this.study_material_text )
     // Simple POST request with a JSON body and response type <any>
+    this.isLoading = true
     this.http.post<any>('http://localhost:8080/generate_cards', { text: this.study_material_text}).subscribe(data => {
-        console.log('HELLLLLOOO')
-        console.log('response', data)
-        this.res = data 
+        this.res = data
+        this.isLoading = false;  
         for (const card of this.res.cards) {
           this.cards.push(card)
         }

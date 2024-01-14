@@ -1,6 +1,9 @@
-<div class="card">
-    <div class="container">
-        <p>{{ cardData.question }}</p>
-        <p (click)="toggleClicked()" [ngStyle]="{color: getColor()}"><i>{{ cardData.answer }}</i></p>
-    </div>
+<div class="card" (click)="toggleClicked()">
+  <div class="container">
+    <p>{{ cardData.question }}</p>
+    <p *ngIf="isClicked">
+      <i>{{ cardData.answer }}</i>
+      <!-- NOT WORKIN -->
+    </p>
+  </div>
 </div>

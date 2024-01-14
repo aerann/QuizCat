@@ -42,3 +42,7 @@ button:disabled {
   background-color: #9fbadda4;
   color: #ccdccc;
 }
+
+#back-button:hover {
+    cursor: pointer;
+}

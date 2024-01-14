@@ -11,15 +11,13 @@ import { HttpClient} from '@angular/common/http';
 export class StudyMaterialComponent {
   study_material_text; 
   res;
-  isLoading = false; 
-  // cards;
-  //cards = ['test1', 'test2'] 
+  isLoading = false;
+  isDone = false;  
   cards = [] 
+
   constructor(private http: HttpClient) { }
 
-
-  async onSubmit(form: NgForm){
-    
+  onSubmit(form: NgForm){
     console.log(form);
     console.log('this is the body text:', this.study_material_text )
     // Simple POST request with a JSON body and response type <any>
@@ -31,6 +29,11 @@ export class StudyMaterialComponent {
           this.cards.push(card)
         }
     })
+    this.isDone = true;
   }
 
+  refreshPage(){
+    window.location.reload();
+  }
+  
 }
